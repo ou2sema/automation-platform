@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+# A new push supersedes the run before it; browser jobs are not cheap.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Typecheck, lint, self-tests, BDD slice
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      AP_RUN_LABEL: ci-${{ github.sha }}
+      AP_LOG_LEVEL: info
+      AP_HEADLESS: "true"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      # The lockfile and the pinned versions are the contract; `npm ci` is the only
+      # supported install, and `doctor` verifies the installed tree matches the pins.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Environment check
+        run: npm run doctor
+
+      - name: Types
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Formatting
+        run: npm run format:check
+
+      - name: Framework self-tests
+        run: npm run test:unit
+
+      - name: BDD slice
+        run: npm run test:bdd
+
+      # Reports and artifacts are the diagnosis, so keep them even when the run failed.
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports-${{ github.run_number }}
+          path: reports/
+          if-no-files-found: ignore
+          retention-days: 7

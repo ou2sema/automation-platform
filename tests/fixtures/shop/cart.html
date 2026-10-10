@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shop - Cart</title>
+  </head>
+  <body data-route="cart">
+    <main data-testid="shop-page" data-route="cart">
+      <h1>Cart</h1>
+      <p data-testid="empty-cart" hidden>Your cart is empty.</p>
+      <ul data-testid="cart-lines"></ul>
+      <section data-testid="cart-summary">
+        <p data-testid="cart-count">0</p>
+        <p>Subtotal <span data-testid="cart-subtotal">$0.00</span></p>
+        <p>Shipping <span data-testid="cart-shipping">$0.00</span></p>
+        <p>Tax <span data-testid="cart-tax">$0.00</span></p>
+        <p>Total <span data-testid="cart-total">$0.00</span></p>
+      </section>
+      <a data-testid="back-to-catalogue" href="catalogue.html">Continue shopping</a>
+      <button data-testid="proceed-to-checkout" type="button">Proceed to checkout</button>
+    </main>
+    <script src="./shop.js"></script>
+    <script>
+      document
+        .querySelector("[data-testid='proceed-to-checkout']")
+        .addEventListener("click", () => {
+          globalThis.location.assign("checkout.html");
+        });
+    </script>
+  </body>
+</html>

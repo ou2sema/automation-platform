@@ -1,0 +1,23 @@
+node_modules/
+reports/
+coverage/
+dist/
+healing-data/*.json
+healing-data/*.sqlite
+*.log
+
+# Local secrets. .env.example is committed and must stay free of real values.
+.env
+.env.*
+!.env.example
+
+# Playwright / browser artifacts
+test-results/
+.playwright/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

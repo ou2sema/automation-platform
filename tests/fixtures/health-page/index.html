@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Automation Platform Health Fixture</title>
+  </head>
+  <body>
+    <main>
+      <h1>Automation platform health fixture</h1>
+      <p data-testid="health-status" id="health-status">fixture-ready</p>
+    </main>
+    <script type="module">
+      // Render the status from script rather than hard-coding it, so a passing
+      // check proves JavaScript executed in a real browser rather than merely
+      // that a file was read.
+      document.querySelector("#health-status").textContent = "browser-executed";
+    </script>
+  </body>
+</html>

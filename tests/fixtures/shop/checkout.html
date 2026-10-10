@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shop - Checkout</title>
+  </head>
+  <body data-route="checkout">
+    <main data-testid="shop-page" data-route="checkout">
+      <h1>Checkout</h1>
+      <p data-testid="checkout-error" role="alert" hidden></p>
+      <ul data-testid="checkout-lines"></ul>
+      <p>Amount due <span data-testid="checkout-total">$0.00</span></p>
+      <form data-testid="checkout-form">
+        <label>
+          Postal code
+          <input data-testid="postal-code" name="postal-code" type="text" autocomplete="off" />
+        </label>
+        <label>
+          Delivery note
+          <textarea data-testid="delivery-note" name="delivery-note" rows="2"></textarea>
+        </label>
+        <button data-testid="place-order" type="submit">Place order</button>
+      </form>
+      <a data-testid="back-to-cart" href="cart.html">Back to cart</a>
+    </main>
+    <script src="./shop.js"></script>
+  </body>
+</html>

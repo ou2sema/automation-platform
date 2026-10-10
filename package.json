@@ -1,0 +1,46 @@
+{
+  "name": "automation-platform",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Scalable, self-healing UI automation platform (TypeScript + Playwright + Cucumber BDD)",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "npm@11.13.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:bdd": "node --import tsx ./node_modules/@cucumber/cucumber/bin/cucumber.js --config config/cucumber.mjs",
+    "test": "npm run typecheck && npm run lint && npm run test:unit && npm run test:bdd",
+    "install:browsers": "playwright install chromium",
+    "doctor": "node scripts/doctor.mjs"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "13.3.0",
+    "dotenv": "18.0.7",
+    "pino": "10.4.0",
+    "pino-pretty": "13.2.0",
+    "playwright": "1.64.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.12.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.3"
+  }
+}
